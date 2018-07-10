@@ -2,15 +2,16 @@
 html, body{
 	height: 100%;
 	position: relative;
+	overflow-y: hidden;
 }
 
 
 /*---------------------------------------*\
-			#LOGIN-SECTION
+			#LOGIN-PAGE
 \*---------------------------------------*/
 
 
-#login-image{
+#login-image, #home-image{
 	background-image: url("../assets/images/cover.jpg");
 	background-size:cover;
 	background-position: center;
@@ -19,11 +20,14 @@ html, body{
 	width: 100%;
 }
 
-
 #login-form{
-
-	background-color:rgba(192,192,192,0.7);
 	padding: 40px;
+	background-color:rgba(192,192,192,0.7);
+
+}
+
+#login-form, #menu{
+
 	position:absolute;
 	left:50%;
 	top:50%;
@@ -49,6 +53,47 @@ label{
 	width: 80px;
 	font-weight: bold;
 }
+
+
+/*---------------------------------------*\
+				#HOME-PAGE
+\*---------------------------------------*/
+
+#menu{
+	width: 90%;
+	height: 90%;
+}
+
+.menu-item{
+	background-color:rgba(192,192,192,0.7);
+
+	display: inline-block;
+	width:48%;
+	height: 42%;
+	text-align: center;
+	position: relative;
+	margin:1%; 
+
+}
+
+.menu-item h1{
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform: translate(-50%, -50%);
+}
+
+.right{
+	float: right;
+}
+
+
+
+
+
+
+
+
 
 /*---------------------------------------*\
 				#FOOTER
