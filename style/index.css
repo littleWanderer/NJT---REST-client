@@ -3,6 +3,7 @@ html, body{
 	height: 100%;
 	position: relative;
 	overflow-y: hidden;
+	color: black;
 }
 
 
@@ -21,7 +22,7 @@ html, body{
 }
 
 #login-form{
-	padding: 40px;
+	padding: 60px;
 	background-color:rgba(192,192,192,0.7);
 
 }
@@ -37,9 +38,13 @@ html, body{
 
 
 label{
-	width:100px;
+	width:150px;
 	font-weight: bolder;
 	font-size:1.2em;
+}
+
+input{
+	width: 250px;
 }
 
 .group-input{
@@ -73,7 +78,12 @@ label{
 	text-align: center;
 	position: relative;
 	margin:1%; 
+	transition: opacity ease;
 
+}
+
+.menu-item:hover{
+	opacity: 0.9;
 }
 
 .menu-item h1{
@@ -81,6 +91,11 @@ label{
 	left:50%;
 	top:50%;
 	transform: translate(-50%, -50%);
+	color: black;
+}
+
+.menu-item h1:hocer{
+	cursor: default;
 }
 
 .right{
@@ -88,12 +103,172 @@ label{
 }
 
 
+/*---------------------------------------*\
+			#NAVIGATION-BAR
+\*---------------------------------------*/
+
+
+header{
+	width: 100%;
+	position:fixed;
+	top:0;
+	z-index: 10;
+	background-color: white;
+}
+
+.header--large{
+	height:80px;
+
+}
+
+
+
+.shadow {
+  -moz-box-shadow:    0px 3px 2px 1px #f7f0f0;
+  -webkit-box-shadow: 0px 3px 2px 1px #f7f0f0;
+  box-shadow:         0px 3px 2px 1px #f7f0f0;
+}
+
+.navbar{
+	background-color:rgba(192,192,192,0.7);
+	height: 100%;
+}
 
 
 
 
+.navbar__menu{
+	text-align: right;
+	margin-bottom: 0;
+
+}
+
+.menu__item{
+	padding-left: 15px;
+	cursor: pointer;
+	list-style: none;
+	display: inline;
+
+}
+
+.menu__item a{
+	color: #212529;
+}
 
 
+.menu__item a:hover{
+	text-decoration: none;
+	color:grey;
+}
+
+.active-link{
+	font-weight: 450;
+}
+
+/*---------------------------------------*\
+				#DEPARTEMENT-PAGE
+\*---------------------------------------*/
+
+
+.main-section{
+	margin-top: 120px;
+	padding-left:40px;
+	padding-right: 40px;
+}
+
+
+.button{
+	background-color:rgba(192,192,192,0.7);
+	width:150px;
+	height: 50px;
+	border: 1px solid transparent;
+	float: right;
+	color:white;
+}
+
+
+.departments{
+	margin-top: 50px;
+}
+.department{
+  background-color: grey;
+  height: 100px;
+  padding-left:10px;
+  padding-top:15px;
+  margin-bottom: 10px;
+  position:relative;
+  transition: .2s all ease;
+  margin-left: 20px;
+
+  
+}
+
+.department:hover, #add-new-dep:hover{
+	box-shadow: 0 10px 30px 0 rgba(46, 61, 73, 0.8);
+
+}
+
+.department h4{
+    color:white;
+    font-weight: lighter;
+
+  position:absolute;
+	left:50%;
+	top:50%;
+	transform: translate(-50%, -50%);
+  }
+
+.delete_icon, .edit_icon{
+      display: inline;
+      color:white;
+      position:absolute;
+      top:5px;
+      z-index: 10;
+     
+    }
+.delete_icon:hover, .edit_icon:hover{
+    cursor:pointer;
+
+}
+.delete_icon{
+  right:5px;
+}
+
+.modal{
+  margin-top: 2%;
+  display: inline-block;
+  
+}
+
+
+.modal input {
+  display: inline-block;
+
+    margin-right: 5%;
+    width: 85%;
+    height: 8%;
+    padding: 10px;
+    margin-bottom: 5%;
+    color: black;
+  }
+
+.modal-header {
+  color:white;
+  background: url('../assets/images/cover.jpg');
+  background-size: cover;
+  background-position: center;
+  height:100px;
+
+}
+
+.main-modal-content {
+	margin:20px;
+}
+
+.modal-footer button{
+	height: 35px;
+	width:85px;
+}
 
 /*---------------------------------------*\
 				#FOOTER
