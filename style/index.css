@@ -2,7 +2,6 @@
 html, body{
 	height: 100%;
 	position: relative;
-	overflow-y: hidden;
 	color: black;
 }
 
@@ -71,7 +70,6 @@ input{
 
 .menu-item{
 	background-color:rgba(192,192,192,0.7);
-
 	display: inline-block;
 	width:48%;
 	height: 42%;
@@ -112,7 +110,7 @@ header{
 	width: 100%;
 	position:fixed;
 	top:0;
-	z-index: 10;
+	z-index: 100;
 	background-color: white;
 }
 
@@ -179,37 +177,54 @@ header{
 
 .button{
 	background-color:rgba(192,192,192,0.7);
-	width:150px;
-	height: 50px;
+	width:100px;
+	height: 40px;
 	border: 1px solid transparent;
 	float: right;
 	color:white;
+	cursor: pointer;
 }
 
 
 .departments{
 	margin-top: 50px;
+	padding-left: 0!important;
 }
 .department{
-  background-color: grey;
-  height: 100px;
-  padding-left:10px;
-  padding-top:15px;
-  margin-bottom: 10px;
-  position:relative;
+  height: 200px;
+  margin: 10px;
   transition: .2s all ease;
-  margin-left: 20px;
+  list-style: none;
+  padding: 0 !important;
+	box-shadow: 0 10px 30px 0 rgba(46, 61, 73, 0.8);
 
   
 }
 
-.department:hover, #add-new-dep:hover{
+.department-wrapper{
+	height: inherit;
+	display: block;
+}
+
+.department img{
+	width:100%;
+	height: 140px;
+
+}
+
+.department-text{
+	height: 60px;
+	text-align: left;
+	padding-left: 10px;
+}
+
+ #add-new-dep:hover{
 	box-shadow: 0 10px 30px 0 rgba(46, 61, 73, 0.8);
 
 }
 
 .department h4{
-    color:white;
+    color:black;
     font-weight: lighter;
 
   position:absolute;
