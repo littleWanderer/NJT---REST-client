@@ -27,7 +27,6 @@ function createLiteratureElement(data, ul){
 	  		li.setAttribute('class','col-sm-3 book');
 	  		li.setAttribute('id','book-');
 		   	li.innerHTML=`<div class="book-wrapper">
-							   	<i class="delete_icon fa fa-trash" aria-hidden="true"></i>
 							   	<div class="book-upper">
 							   		<img src="assets/images/cover.jpg">
 									<div class="book-text">

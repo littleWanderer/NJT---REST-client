@@ -266,6 +266,7 @@ header{
 }
 
 
+
 .delete_icon:hover, .edit_icon:hover{
     cursor:pointer;
 
@@ -362,6 +363,15 @@ header{
 	padding-left: 15px;
 	padding-top:5px;
 
+}
+
+.subject .delete_icon{
+	display: none;
+	color:black;
+}
+
+.subject:hover .delete_icon{
+	display: block;
 }
 
 

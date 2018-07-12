@@ -29,9 +29,9 @@ function createDepartmentElement(key, val, ul){
 		   	li.innerHTML=`<div class="department-wrapper">
 							   	<img src="assets/images/cover.jpg">
 							   	<i class="delete_icon fa fa-trash" aria-hidden="true"></i>
-								<i class="edit_icon far fa-edit"></i>
-								<div class="department-text">
-						   			<h5>${key}</h5>
+								<i class="edit_icon far fa-edit" id="${key}" data-toggle="modal" data-target="#add_department_modal"></i>
+								<div class="department-text" >
+						   			<h5 id="department-name-"${key}>${key}</h5>
 								</div>
 						  
 		   			</div`;
@@ -154,41 +154,33 @@ $(document).ready(function(){
 	});
 
 
+
+	// get invoker of modal
+
+	
+
+	
 	// update department
 
 	const URLupdateDepartment="http://localhost:9000/departement/save";
-	$(".departments").on('click', '.delete_icon', function(){
-		var id=$(this).parent.attr('id').split('-')[1];
 
-		$.ajax({
-		  type: "PUT",
-		  url: URLupdateDepartment,
-		  data: {
-		      "id": id
-		    },
+	$(document).on('shown.bs.modal','.modal', function (e) {
+        alert('hi');
+	  	var invoker = $(e.relatedTarget);
+	  	if(invoker.is("i")){
+	  		var id= invoker.attr('id');
+			console.log(id);
+		    $(".label-name").attr('id', id);
+	  	}
+		
+    });
 
-		  success: function(){
-		  	var dep="departement-"+id;
-		  	$(dep).remove();
-		  },
-		  error: function(){
-		  	console.log("error while deleting department");
-		  }
-
-		});
-
-
-
-
-	});
-
-
-
-
-
-
+	
 
 
 
 });
+
+
+
 
