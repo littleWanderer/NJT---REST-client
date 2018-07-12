@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Professors</title>
+
+
+	<link rel="stylesheet" type="text/css" href="style/index.css">
+	<link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+	<header class="header--large">
+		<div class="navbar shadow">
+			
+			<div  style="float:right; width:100%">
+				<ul class="navbar__menu">
+					<li class="menu__item"><a href="home.html" >Home</a></li>
+					<li class="menu__item"><a href="subjects.html" >Subjects</a></li>
+					<li class="menu__item"><a href="professors.html" >Professors</a></li>
+					<li class="menu__item"><a href="department.html" >Departments</a></li>
+					<li class="menu__item" ><a href="literature.html" >Literature</a></li>
+
+				</ul>
+			</div>
+		</div>
+	</header>
+
+	<div class="main-section">
+		
+		<div>
+			<h2 style="display: inline">All professors/</h2>
+			<button id="add-new-prof" class="button" data-toggle="modal" data-target="#add_prof_modal">Add new</button>
+
+		</div>
+
+		<div class="container professors" id="professors">
+			<ul class="row align-items-center">
+					
+				<li class="col-sm-3 professor">
+					<div class="professor-wrapper front">
+							   	<img src="assets/images/cover.jpg">
+							   	<i class="delete_icon fa fa-trash" aria-hidden="true"></i>
+								<i class="edit_icon far fa-edit"></i>
+								<div class="professor-text">
+									<img class="profile-img" src="assets/images/cover.jpg">
+						   			
+						   			<h5>Name Surname</h5>
+						   			<h6>Subject</h6>
+								</div>		   			
+					</div
+
+					<!-- back of card -->
+
+					<div class="professor-wrapper back">
+							 <h5>Back</h5>		   			
+					</div
+
+				</li>
+			</ul>
+		</div>
+
+	</div>
+
+
+
+	<!-- modal -->
+
+	<div class="modal fade" role="dialog" id="add_prof_modal">
+	    <div class="modal-dialog">
+	        <form id="professor_form" method="post">
+	            <div class="modal-content" style="inline-block">
+	                <div class="modal-header">
+	                    <h5 class="modal-title" id="modal_heading">Add professor</h5>
+	                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+	                </div>
+
+	                <div class="container main-modal-content">
+	                	<div class="row align-items-center">
+	                		<div class="col-sm-4">
+			                	<label>Name</label>
+			                </div>
+			                <div class="col-sm-8 ">
+	                    		<input name="dep_name" id="dep_name" type="text" required>
+
+			                </div>
+	                	</div>
+
+	                </div>
+
+	                <div class="modal-footer" id="footer_dep">
+	                    <button type="submit" class="button" form="professor_form">Submit</button>
+	                    <button type="button" class="button" data-dismiss="modal">Close</button>
+	                    <input type="hidden" name="action" value="dep">
+
+	                    <div id="professor_created"></div>
+
+	                </div>
+
+	            </div>
+
+	        </form>
+	    </div>
+
+	</div>
+
+	
+	<footer id="foo">
+		<h6 class="footer__copyright">&copy; 2018, FON</h6>
+	</footer>
+	
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/professors.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+	
+
+
+</body>
+</html>

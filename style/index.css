@@ -6,6 +6,11 @@ html, body{
 }
 
 
+#wrapper {
+  min-height: 100%;
+  position: relative;
+}
+
 /*---------------------------------------*\
 			#LOGIN-PAGE
 \*---------------------------------------*/
@@ -186,11 +191,18 @@ header{
 }
 
 
-.departments{
+ #add-new-dep:hover, #add-new-prof{
+	box-shadow: 0 10px 30px 0 rgba(46, 61, 73, 0.8);
+
+}
+
+
+
+.departments, .professors{
 	margin-top: 50px;
 	padding-left: 0!important;
 }
-.department{
+.department, .professor{
   height: 200px;
   margin: 10px;
   transition: .2s all ease;
@@ -201,29 +213,32 @@ header{
   
 }
 
-.department-wrapper{
+
+
+.department-wrapper, .professor-wrapper{
 	height: inherit;
 	display: block;
 }
 
-.department img{
+.department img, .professor img{
 	width:100%;
 	height: 140px;
 
 }
 
-.department-text{
+.department-text, .professor-text{
 	height: 60px;
 	text-align: left;
 	padding-left: 10px;
 }
 
- #add-new-dep:hover{
-	box-shadow: 0 10px 30px 0 rgba(46, 61, 73, 0.8);
+.department:hover i, .professor:hover i{
+	display: inline;
+    z-index: 10;
 
 }
 
-.department h4{
+.department h4, .professor h4{
     color:black;
     font-weight: lighter;
 
@@ -234,13 +249,14 @@ header{
   }
 
 .delete_icon, .edit_icon{
-      display: inline;
       color:white;
       position:absolute;
       top:5px;
-      z-index: 10;
-     
-    }
+      display: none;
+
+}
+
+
 .delete_icon:hover, .edit_icon:hover{
     cursor:pointer;
 
@@ -248,6 +264,50 @@ header{
 .delete_icon{
   right:5px;
 }
+
+.edit_icon{
+	right:30px;
+}
+
+/*---------------------------------------*\
+				#PROFESSORS-PAGE
+\*---------------------------------------*/
+
+.front{
+	display: block;
+}
+
+.back{
+	display: none;
+	transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -webkit-transform: rotateY(-180deg);
+}
+
+
+
+
+.professor-flipped{
+	 transform: rotatey(180deg);
+    -moz-transform: rotatey(180deg);
+    -webkit-transform: rotatey(180deg);
+}
+
+.profile-img{
+	border-radius: 50%;
+	height: 50px!important;
+	width:50px!important;
+	float: left;
+	margin-top:5px;
+	margin-right: 15px;
+}
+
+
+/*---------------------------------------*\
+				#MODALS
+\*---------------------------------------*/
+
+
 
 .modal{
   margin-top: 2%;
@@ -283,6 +343,7 @@ header{
 .modal-footer button{
 	height: 35px;
 	width:85px;
+	margin-top: 50px;
 }
 
 /*---------------------------------------*\
@@ -291,12 +352,19 @@ header{
 
 footer{
 	background-color: transparent;
-	color:white;
-	position: fixed;
-	bottom: 0;
 	height: 60px;
 	width:100%;
 	text-align: center;
+	color:black;
+	bottom: 0;
+	position: absolute;
+
+}
+
+.footer-fixed{
+	color:white;
+	position: fixed;
+	bottom:10px;
 
 }
 
