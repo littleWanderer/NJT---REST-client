@@ -191,18 +191,18 @@ header{
 }
 
 
- #add-new-dep:hover, #add-new-prof, #add-new-literature{
+ #add-new-dep:hover, #add-new-prof, #add-new-literature, #add-new-subject{
 	box-shadow: 0 10px 30px 0 rgba(46, 61, 73, 0.8);
 
 }
 
 
 
-.departments, .professors, .literature{
+.departments, .professors, .literature, .subjects{
 	margin-top: 50px;
 	padding-left: 0!important;
 }
-.department, .professor, .book{
+.department, .professor, .book, .subject{
   height: 200px;
   margin: 10px;
   transition: .2s all ease;
@@ -215,7 +215,7 @@ header{
 
 
 
-.department-wrapper, .professor-wrapper, .book-wrapper{
+.department-wrapper, .professor-wrapper, .book-wrapper, .subject-wrapper{
 	height: inherit;
 	display: block;
 }
@@ -229,13 +229,13 @@ header{
 	height: 60px;
 }
 
-.department img, .professor img, .book-upper{
+.department img, .professor img, .book-upper, .subject-upper{
 	width:100%;
 
 }
 
 
-.department-text, .professor-text, .book-down{
+.department-text, .professor-text, .book-down, .subject-down{
 	
 	text-align: left;
 	padding-left: 10px;
@@ -332,7 +332,7 @@ header{
 	text-align: center;
 }
 
-.book-upper{
+.book-upper, .subject-upper{
 	height: 120px;
 	border-bottom: 0.1px solid #d3d3d3;
 	
@@ -352,9 +352,18 @@ header{
 	float:right;
 }
 
-.book-down{
+.book-down, .subject-down{
 	height: 80px;
 }
+
+
+.subject-upper, .subject-down{
+
+	padding-left: 15px;
+	padding-top:5px;
+
+}
+
 
 
 

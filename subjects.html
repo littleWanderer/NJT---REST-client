@@ -38,11 +38,11 @@
 		
 		<div>
 			<h2 style="display: inline">All subjects/</h2>
-			<button id="add-new-subject" class="button" data-toggle="modal" data-target="#add_literature_modal">Add new</button>
+			<button id="add-new-subject" class="button" data-toggle="modal" data-target="#add_subject_modal">Add new</button>
 
 		</div>
 
-		<div class="container literature" id="literature">
+		<div class="container subjects" id="subjects">
 			
 		</div>
 
@@ -52,12 +52,12 @@
 
 	<!-- modal -->
 
-	<div class="modal fade" role="dialog" id="add_literature_modal">
+	<div class="modal fade" role="dialog" id="add_subject_modal">
 	    <div class="modal-dialog">
-	        <form id="literature_form" method="post">
+	        <form id="subject_form" method="post">
 	            <div class="modal-content" style="inline-block">
 	                <div class="modal-header">
-	                    <h5 class="modal-title" id="modal_heading">Add literature</h5>
+	                    <h5 class="modal-title" id="modal_heading">Add subject</h5>
 	                    <button type="button" class="close" data-dismiss="modal">&times;</button>
 	                </div>
 
@@ -67,7 +67,7 @@
 			                	<label>Name</label>
 			                </div>
 			                <div class="col-sm-8 ">
-	                    		<input name="literature_name" id="literature_name" type="text" required>
+	                    		<input name="subject_name" id="subject_name" type="text" required>
 
 			                </div>
 
@@ -81,25 +81,7 @@
 		                        </select>
 		                    </div>
 
-		                    <div class="col-sm-4">
-			                	<label>Author</label>
-			                </div>
-		                    <div class="col-sm-8">
-		                    	  <select name="author" title="author" class="select_field">
-		                            <option selected="selected" value="selected">Select author</option>
-		                            
-		                        </select>
-		                    </div>
-
-		                    <div class="col-sm-4">
-			                	<label>Author</label>
-			                </div>
-		                    <div class="col-sm-8">
-		                    	  <select name="author" title="author" class="select_field">
-		                            <option selected="selected" value="selected">Select author</option>
-		                            
-		                        </select>
-		                    </div>
+		                   
 		                    
 
 	                	</div>
@@ -107,9 +89,9 @@
 	                </div>
 
 	                <div class="modal-footer" id="footer_dep">
-	                    <button type="submit" class="button" form="literature_form">Submit</button>
+	                    <button type="submit" class="button" form="subject_form">Submit</button>
 	                    <button type="button" class="button" data-dismiss="modal">Close</button>
-	                    <div id="literature_created"></div>
+	                    <div id="subject_created"></div>
 
 	                </div>
 
