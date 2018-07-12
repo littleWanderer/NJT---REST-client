@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Professors</title>
+	<title>Subjects</title>
 
 
 	<link rel="stylesheet" type="text/css" href="style/index.css">
@@ -37,12 +37,13 @@
 	<div class="main-section">
 		
 		<div>
-			<h2 style="display: inline">All professors/</h2>
-			<button id="add-new-prof" class="button" data-toggle="modal" data-target="#add_prof_modal">Add new</button>
+			<h2 style="display: inline">All subjects/</h2>
+			<button id="add-new-subject" class="button" data-toggle="modal" data-target="#add_literature_modal">Add new</button>
 
 		</div>
 
-		<div class="container professors" id="professors">
+		<div class="container literature" id="literature">
+			
 		</div>
 
 	</div>
@@ -51,12 +52,12 @@
 
 	<!-- modal -->
 
-	<div class="modal fade" role="dialog" id="add_prof_modal">
+	<div class="modal fade" role="dialog" id="add_literature_modal">
 	    <div class="modal-dialog">
-	        <form id="professor_form" method="post">
+	        <form id="literature_form" method="post">
 	            <div class="modal-content" style="inline-block">
 	                <div class="modal-header">
-	                    <h5 class="modal-title" id="modal_heading">Add professor</h5>
+	                    <h5 class="modal-title" id="modal_heading">Add literature</h5>
 	                    <button type="button" class="close" data-dismiss="modal">&times;</button>
 	                </div>
 
@@ -66,62 +67,37 @@
 			                	<label>Name</label>
 			                </div>
 			                <div class="col-sm-8 ">
-	                    		<input name="name" id="teacher_name" type="text" required>
+	                    		<input name="literature_name" id="literature_name" type="text" required>
 
 			                </div>
 
 			                <div class="col-sm-4">
-			                	<label>Surname</label>
+			                	<label>Author</label>
 			                </div>
-			                <div class="col-sm-8 ">
-	                    		<input name="dep_name" id="teacher_surname" type="text" required>
-			                </div>
-
-			               <div class="col-sm-4">
-			                	<label>Email</label>
-			                </div>
-			                <div class="col-sm-8 ">
-	                    		<input name="email" id="email" type="email" required>
-			                </div>
-
-
-							<div class="col-sm-4">
-			                	<label>Phone</label>
-			                </div>
-			                <div class="col-sm-8 ">
-	                    		<input name="phone" id="teacher_phone" type="text" required>
-			                </div>
-
-			                <div class="col-sm-4">
-		                        <label>Date of hiring</label>
-		                    </div>
-		                    <div  class="col-sm-8">
-		                        <input type="date" name="hiring_date" id="hiring_date"  required autocomplete="off">
-		                    </div>
-
-		                    <div class="col-sm-4">
-		                        <label>Vocation</label>
-		                    </div>
 		                    <div class="col-sm-8">
-		                    	  <select name="vocation" title="vocation" class="select_field" id="vocationCB" required>
-		                            <option selected="selected" value="selected">Select vocation</option>
-		                            <option >Docent</option>
-		                            <option >Doctor</option>
-		                            <option >Vanredni profesor</option>
-		                            <option >Redovni profesor</option>
-		                            <option >Profesoremeritus</option>
+		                    	  <select name="author" title="author" class="select_field">
+		                            <option selected="selected" value="selected">Select author</option>
+		                            
 		                        </select>
 		                    </div>
-		                    
-
 
 		                    <div class="col-sm-4">
-		                        <label>Department</label>
-		                    </div>
+			                	<label>Author</label>
+			                </div>
 		                    <div class="col-sm-8">
+		                    	  <select name="author" title="author" class="select_field">
+		                            <option selected="selected" value="selected">Select author</option>
+		                            
+		                        </select>
+		                    </div>
 
-		                        <select name="department" title="department" class="select_field" id="departmentCB" required>
-		                            <option selected="selected" value="selected">Select department</option>     
+		                    <div class="col-sm-4">
+			                	<label>Author</label>
+			                </div>
+		                    <div class="col-sm-8">
+		                    	  <select name="author" title="author" class="select_field">
+		                            <option selected="selected" value="selected">Select author</option>
+		                            
 		                        </select>
 		                    </div>
 		                    
@@ -131,9 +107,9 @@
 	                </div>
 
 	                <div class="modal-footer" id="footer_dep">
-	                    <button type="submit" class="button" form="professor_form">Submit</button>
+	                    <button type="submit" class="button" form="literature_form">Submit</button>
 	                    <button type="button" class="button" data-dismiss="modal">Close</button>
-	                    <div id="professor_created"></div>
+	                    <div id="literature_created"></div>
 
 	                </div>
 
@@ -150,7 +126,7 @@
 	</footer>
 	
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="js/professors.js"></script>
+	<script type="text/javascript" src="js/subject.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 
 	

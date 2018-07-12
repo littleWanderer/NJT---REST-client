@@ -191,18 +191,18 @@ header{
 }
 
 
- #add-new-dep:hover, #add-new-prof{
+ #add-new-dep:hover, #add-new-prof, #add-new-literature{
 	box-shadow: 0 10px 30px 0 rgba(46, 61, 73, 0.8);
 
 }
 
 
 
-.departments, .professors{
+.departments, .professors, .literature{
 	margin-top: 50px;
 	padding-left: 0!important;
 }
-.department, .professor{
+.department, .professor, .book{
   height: 200px;
   margin: 10px;
   transition: .2s all ease;
@@ -215,19 +215,28 @@ header{
 
 
 
-.department-wrapper, .professor-wrapper{
+.department-wrapper, .professor-wrapper, .book-wrapper{
 	height: inherit;
 	display: block;
 }
 
-.department img, .professor img{
-	width:100%;
+.department img, .professor img {
 	height: 140px;
 
 }
 
 .department-text, .professor-text{
 	height: 60px;
+}
+
+.department img, .professor img, .book-upper{
+	width:100%;
+
+}
+
+
+.department-text, .professor-text, .book-down{
+	
 	text-align: left;
 	padding-left: 10px;
 }
@@ -282,15 +291,27 @@ header{
 	transform: rotateY(-180deg);
     -moz-transform: rotateY(-180deg);
     -webkit-transform: rotateY(-180deg);
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.contact-info{
+	margin-bottom: 20px;
+}
+
+.contact-info h6{
+	display: inline;
 }
 
 
 
 
+
+
 .professor-flipped{
-	 transform: rotatey(180deg);
-    -moz-transform: rotatey(180deg);
-    -webkit-transform: rotatey(180deg);
+	 transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
 }
 
 .profile-img{
@@ -301,6 +322,41 @@ header{
 	margin-top:5px;
 	margin-right: 15px;
 }
+
+
+/*---------------------------------------*\
+				#LITERATURE
+\*---------------------------------------*/
+
+.tab{
+	text-align: center;
+}
+
+.book-upper{
+	height: 120px;
+	border-bottom: 0.1px solid #d3d3d3;
+	
+}
+
+
+.book-upper img{
+	width:40%;
+	height: 100%;
+}
+
+.book-text{
+	padding-left: 10px;
+	padding-top: 10px;
+	width:60%;
+	text-align: left;
+	float:right;
+}
+
+.book-down{
+	height: 80px;
+}
+
+
 
 
 /*---------------------------------------*\
@@ -316,8 +372,8 @@ header{
 }
 
 
-.modal input {
-  display: inline-block;
+.modal input, .modal .select_field{
+  	display: inline-block;
 
     margin-right: 5%;
     width: 85%;
@@ -343,7 +399,7 @@ header{
 .modal-footer button{
 	height: 35px;
 	width:85px;
-	margin-top: 50px;
+	margin-top: 10px;
 }
 
 /*---------------------------------------*\

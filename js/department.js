@@ -29,7 +29,7 @@ function createDepartmentElement(key, val, ul){
 		   	li.innerHTML=`<div class="department-wrapper">
 							   	<img src="assets/images/cover.jpg">
 							   	<i class="delete_icon fa fa-trash" aria-hidden="true"></i>
-								<i class="edit_icon"></i>
+								<i class="edit_icon far fa-edit"></i>
 								<div class="department-text">
 						   			<h5>${key}</h5>
 								</div>
@@ -68,9 +68,9 @@ $(document).ready(function(){
         console.log("status:", status);
 	    console.log("xhr:", xhr);
 
-	    var ul=ulExists('#ul-departments');
 	  	
-
+	    var ul=ulExists('#ul-departments');
+	  
 		$.each( data, function( key, val ) {
 
 	  		createDepartmentElement(key, val, ul);				
@@ -133,7 +133,36 @@ $(document).ready(function(){
 
 		$.ajax({
 		  type: "DELETE",
-		  url: URLsaveDepartment+id,
+		  url: URLdeleteDepartment+id,
+		  data: {
+		      "id": id
+		    },
+
+		  success: function(){
+		  	var dep="departement-"+id;
+		  	$(dep).remove();
+		  },
+		  error: function(){
+		  	console.log("error while deleting department");
+		  }
+
+		});
+
+
+
+
+	});
+
+
+	// update department
+
+	const URLupdateDepartment="http://localhost:9000/departement/save";
+	$(".departments").on('click', '.delete_icon', function(){
+		var id=$(this).parent.attr('id').split('-')[1];
+
+		$.ajax({
+		  type: "PUT",
+		  url: URLupdateDepartment,
 		  data: {
 		      "id": id
 		    },
