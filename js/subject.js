@@ -28,7 +28,6 @@ function createSubjectElement(data, ul){
 							   	<div class="subject-upper">
 							   		<i class="fas fa-graduation-cap fa-3x" aria-hidden="true" ></i>
 							   		<h5>${data.name}</h5>
-							   		<h6>Full-time Prof. </h6>
 							   	</div>
 
 							   	<div class="subject-down">
@@ -45,8 +44,84 @@ function createSubjectElement(data, ul){
 
 $(document).ready(function(){
 	
+	// return all literature 
 
-	// return all literature
+	const URLbooks="http://localhost:9005/literature/returnAll";
+	$.ajax({
+	  headers: { 
+	        'Accept': 'application/json',
+	        'Content-Type': 'application/json' 
+	  },
+	  url : URLbooks,
+	  type: 'GET',
+      dataType: 'json',
+      crossOrigin: true,
+      crossDomain: true,
+
+	   error: function(xhr, status, errorThrown){
+	            console.log("xhr:", xhr);
+	            console.log("status:", status);
+	            console.log("error:", errorThrown);
+	    }
+	})
+	.then(function(data, status, xhr){
+		console.log("data:", data);
+        console.log("status:", status);
+	    console.log("xhr:", xhr);
+
+	    localStorage.setItem('literature', JSON.stringify(data));
+
+
+	  	var $dropdown = $(".literatureCB");
+		$.each(data, function(key, value) {
+
+		    $dropdown.append($("<option />").val(data[key].id).text(data[key].name));
+		});
+
+	})
+
+
+
+	//return all professors
+
+	 
+
+	const URLprofs="http://localhost:9005/teacher/returnAll";
+	$.ajax({
+	  headers: { 
+	        'Accept': 'application/json',
+	        'Content-Type': 'application/json' 
+	  },
+	  url : URLprofs,
+	  type: 'GET',
+      dataType: 'json',
+      crossOrigin: true,
+      crossDomain: true,
+
+	   error: function(xhr, status, errorThrown){
+	            console.log("xhr:", xhr);
+	            console.log("status:", status);
+	            console.log("error:", errorThrown);
+	    }
+	})
+	.then(function(data, status, xhr){
+		console.log("data:", data);
+        console.log("status:", status);
+	    console.log("xhr:", xhr);
+
+	    localStorage.setItem('professors-subj', JSON.stringify(data));
+
+
+	  	var $dropdown = $(".professorCB");
+		$.each(data, function(key, value) {
+
+		    $dropdown.append($("<option />").val(data[key].id).text(data[key].name+" "+data[key].surname));
+		});
+
+	})
+
+
+	// return all subjects
 
 	const URLsubjects="http://localhost:9005/subject/returnAll";
 	$.ajax({
@@ -83,7 +158,66 @@ $(document).ready(function(){
 	//save subject
 
 
-	
+	const URLsaveSubj="http://localhost:9005/subject/save";
+
+	$("#subject_form").submit(function(e){
+
+		e.preventDefault();
+        e.stopPropagation();
+
+		var name=$('#subject_name').val();
+		var ects=$('#ects').val();
+
+		
+		
+
+		var jsonData = {};
+		var profs=[];
+		var lit=[];
+
+		jsonData["name"]=name;
+		jsonData["ects"]=ects;
+
+		
+		
+
+		jsonData["teacherEntities"]=profs;
+		jsonData["literatureEntities"]=lit;
+
+
+
+		console.log(jsonData);
+
+		$.ajax({
+			headers: { 
+			    'Accept': 'application/json',
+			    'Content-Type': 'application/json' 
+			  },
+			  type: "POST",
+			  url: URLsaveSubj,
+			  dataType: "json",
+			  data: JSON.stringify(eval(jsonData)),
+
+			  success: function(data){ //mora se vratiti generisani kljuc
+
+			  	var form=document.getElementById('subject_form');
+			  	form.reset();
+
+	  			var ul=ulExists('#ul-subjects');
+	  			createLiteratureElement(data, ul);
+			  		
+			  },
+			  error: function(){
+			  	console.log("error while saving literature");
+			  }
+
+
+
+		});
+
+
+
+	});
 
 
 
