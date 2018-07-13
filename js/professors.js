@@ -25,7 +25,7 @@ function createProfessorElement(data, ul){
 
 	var li=document.createElement('li');
 	  		li.setAttribute('class','col-sm-3 professor');
-	  		li.setAttribute('id','professor-');
+	  		li.setAttribute('id','professor-'+data.id);
 		   	li.innerHTML=`<div class="professor-wrapper front">
 							   	<img src="assets/images/cover.jpg">
 							   	<i class="delete_icon fa fa-trash" aria-hidden="true"></i>
@@ -33,8 +33,8 @@ function createProfessorElement(data, ul){
 								<div class="professor-text">
 									<img class="profile-img" src="assets/images/cover.jpg">
 						   			
-						   			<h5>Name Surname</h5>
-						   			<h6>Vocation</h6>
+						   			<h5>${data.name} ${data.surname}</h5>
+						   			<h6>${data.vocationEnum}</h6>
 								</div>		   			
 								
 						  	</div>
@@ -42,15 +42,15 @@ function createProfessorElement(data, ul){
 							<div class="professor-wrapper back">
 							   	<div class="contact-info">
 							   		<i class="fas fa-envelope" aria-hidden="true"></i>
-						   			<h6>Email</h6>
+						   			<h6>${data.email}</h6>
 							   	</div>
 							   	<div class="contact-info">
 							   	<i class="fas fa-phone" aria-hidden="true"></i>
-						   		<h6>Phone</h6>
+						   		<h6>${data.phone}</h6>
 						   		</div>
 							   	<div class="contact-info">
 							   	<i class="fas fa-graduation-cap" aria-hidden="true"></i>
-							   	<h6>Department</h6>
+							   	<h6>${data.departmentEntity.departmentName}</h6>
 							   	</div>
 									 	   			
 							</div`;
@@ -66,14 +66,15 @@ $(document).ready(function(){
 
 	// return all professors
 
-	const URLprof="https://jsonplaceholder.typicode.com/users";
-	//const URL="http://localhost:9000/teacher/returnAll";
+	const URL="http://localhost:9005/teacher/returnAll";
 	$.ajax({
-	  url : URLprof,
+	  headers: { 
+        'Accept': 'application/json',
+        'Content-Type': 'application/json' 
+      },
+	  url : URL,
 	  type: 'GET',
       dataType: 'json',
-      crossOrigin: true,
-      crossDomain: true,
 
 	   error: function(xhr, status, errorThrown){
 	            console.log("xhr:", xhr);
@@ -87,24 +88,29 @@ $(document).ready(function(){
 	    console.log("xhr:", xhr);
 
 	    var ul=ulExists('#ul-professors');
-	  	
-
 		$.each( data, function( key, val ) {
 
-	  		createProfessorElement(data, ul);				
+	  		createProfessorElement(data[key], ul);				
 
 		}); 
 
 	})
 
 
+
+
+
+
 	// return all departments
 	// populate depatments CB
 
 
-	const URLdep="https://jsonplaceholder.typicode.com/users";
-	//const URL="http://localhost:9000/department/returnAll";
+	const URLdep="http://localhost:9005/department/returnAll";
 	$.ajax({
+	  headers: { 
+        'Accept': 'application/json',
+        'Content-Type': 'application/json' 
+      },
 	  url : URLdep,
 	  type: 'GET',
       dataType: 'json',
@@ -122,6 +128,7 @@ $(document).ready(function(){
 
 	})
 	.then(function(data, status, xhr){
+		localStorage.setItem('departments', JSON.stringify(data));
 		console.log("data:", data);
         console.log("status:", status);
 	    console.log("xhr:", xhr);
@@ -129,9 +136,9 @@ $(document).ready(function(){
 	  	// populate cb
 
 	  	var $dropdown = $("#departmentCB");
-		$.each(data, function() {
-			//value should be department id
-		    $dropdown.append($("<option />").val(1).text("kk"));
+		$.each(data, function(key, value) {
+
+		    $dropdown.append($("<option />").val(data[key].id).text(data[key].departmentName));
 		});
 	   	
 
@@ -139,8 +146,8 @@ $(document).ready(function(){
 
 
 
-	// save department
-	const URLsaveTeacher="http://localhost:9000/teacher/save";
+	// save teacher
+	const URLsaveTeacher="http://localhost:9005/teacher/save";
 
 	$("#professor_form").submit(function(e){
 
@@ -154,26 +161,42 @@ $(document).ready(function(){
 		var date=$('#hiring_date').val();
 
 		var vocation=$('#vocationCB').find(":selected").text();
-		var dep=$('#departmentCB').find(":selected").val();
+		var depId=$('#departmentCB').find(":selected").val();
 
-		
 		var jsonData = {};
+		var department={};
 		jsonData["name"]=name;
 		jsonData["surname"]=surname;
 		jsonData["email"]=email;
 		jsonData["phone"]=phone;
 		jsonData["dateOfHiring"]=date;
-		jsonData["vocation"]=vocation;
-		jsonData["department_Id"]=dep;
+		jsonData["vocationEnum"]=vocation;
+
+		var data=JSON.parse(localStorage.getItem('departments'));
+		console.log(data);
 
 
+		for (var i=0 ; i < data.length ; i++)
+		{
+		    if (data[i]["id"] == depId) {
+		        jsonData["departmentEntity"]=data[i];
+		    }
+		}
+
+		
+
+		
 		console.log(jsonData);
 
 		$.ajax({
+			headers: { 
+			    'Accept': 'application/json',
+			    'Content-Type': 'application/json' 
+			  },
 			  type: "POST",
-			  url: URLsaveDepartment,
+			  url: URLsaveTeacher,
 			  dataType: "json",
-			  data: jsonData,
+			  data: JSON.stringify(eval(jsonData)),
 
 			  success: function(data){ //mora se vratiti generisani kljuc
 
@@ -199,23 +222,26 @@ $(document).ready(function(){
 	// delete teacher
 
 	
-	const URLdeleteTeacher="http://localhost:9000/teacher/delete/";
+	const URLdeleteTeacher="http://localhost:9005/teacher/delete/";
 	$(".professors").on('click', '.delete_icon', function(){
-		var id=$(this).parent.attr('id').split('-')[1];
+		var id=$(this).parent().parent().attr('id').split('-')[1];
 
+		var url=URLdeleteTeacher+id;
 		$.ajax({
+		  headers: { 
+	        'Accept': 'application/json',
+	        'Content-Type': 'application/json' 
+	      },
 		  type: "DELETE",
-		  url: URLdeleteTeacher+id,
-		  data: {
-		      "id": id
-		    },
+		  url: url,
 
 		  success: function(){
-		  	var prof="professor-"+id;
+		  	var prof="#professor-"+id;
 		  	$(prof).remove();
+
 		  },
 		  error: function(){
-		  	console.log("error while deleting department");
+		  	console.log("error while deleting teacher");
 		  }
 
 		});

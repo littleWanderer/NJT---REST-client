@@ -23,17 +23,16 @@ function createSubjectElement(data, ul){
 
 	var li=document.createElement('li');
 	  		li.setAttribute('class','col-sm-3 subject');
-	  		li.setAttribute('id','book-');
+	  		li.setAttribute('id','book-'+data.id);
 		   	li.innerHTML=`<div class="subject-wrapper">
-							   	<i class="delete_icon fa fa-trash" aria-hidden="true"></i>
 							   	<div class="subject-upper">
 							   		<i class="fas fa-graduation-cap fa-3x" aria-hidden="true" ></i>
-							   		<h5>Subject name</h5>
-							   		<h6>Prof. name</h6>
+							   		<h5>${data.name}</h5>
+							   		<h6>Full-time Prof. </h6>
 							   	</div>
 
 							   	<div class="subject-down">
-						   			<h6>Other prof</h6>
+						   			<h6>ECTS: ${data.ects}</h6>
 						   			
 							   	</div>
 								
@@ -49,14 +48,15 @@ $(document).ready(function(){
 
 	// return all literature
 
-	const URLsubjects="https://jsonplaceholder.typicode.com/users";
-	//const URL="http://localhost:9000/subject/returnAll";
+	const URLsubjects="http://localhost:9005/subject/returnAll";
 	$.ajax({
+	   headers: { 
+        'Accept': 'application/json',
+        'Content-Type': 'application/json' 
+	  },
 	  url : URLsubjects,
 	  type: 'GET',
       dataType: 'json',
-      crossOrigin: true,
-      crossDomain: true,
 
 	   error: function(xhr, status, errorThrown){
 	            console.log("xhr:", xhr);
@@ -71,14 +71,22 @@ $(document).ready(function(){
 
 	    var ul=ulExists('#ul-subject');
 	  	
-
 		$.each(data, function( key, val ) {
 
-	  		createSubjectElement(data, ul);				
+	  		createSubjectElement(data[key], ul);				
 
 		}); 
 
-	})
+	});
+
+
+	//save subject
+
+
+	
+
+
+
 
 
 })

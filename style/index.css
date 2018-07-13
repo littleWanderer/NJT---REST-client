@@ -339,6 +339,11 @@ header{
 	
 }
 
+.book-down{
+	float:right;
+	margin-right: 15px;
+}
+
 
 .book-upper img{
 	width:40%;

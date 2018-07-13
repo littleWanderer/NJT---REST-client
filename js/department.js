@@ -21,17 +21,21 @@ function ulExists(id){
 
 
 
-function createDepartmentElement(key, val, ul){
+function createDepartmentElement(data, name, ul){
+	
+	if(name==""){
+		name=data.departmentName;
+	}
 
 	var li=document.createElement('li');
 	  		li.setAttribute('class','col-sm-3 department');
-	  		li.setAttribute('id','department-'+key);
+	  		li.setAttribute('id', "department-"+data.id);
 		   	li.innerHTML=`<div class="department-wrapper">
 							   	<img src="assets/images/cover.jpg">
 							   	<i class="delete_icon fa fa-trash" aria-hidden="true"></i>
-								<i class="edit_icon far fa-edit" id="${key}" data-toggle="modal" data-target="#add_department_modal"></i>
+								<i class="edit_icon far fa-edit" id=${data.id} data-toggle="modal" data-target="#add_department_modal"></i>
 								<div class="department-text" >
-						   			<h5 id="department-name-"${key}>${key}</h5>
+						   			<h5 id="department-name-${data.id}" class="dep-name">${name}</h5>
 								</div>
 						  
 		   			</div`;
@@ -42,10 +46,13 @@ function createDepartmentElement(key, val, ul){
 
 
 $(document).ready(function(){
+
+	var token=sessionStorage.getItem('token');
+	console.log(token);
 	
-	
-	const URL="https://jsonplaceholder.typicode.com/users";
-	//const URL="http://localhost:9000/department/returnAll";
+	// returnAll
+
+	const URL="http://localhost:9005/department/returnAll";
 	$.ajax({
 	  url : URL,
 	  type: 'GET',
@@ -71,17 +78,34 @@ $(document).ready(function(){
 	  	
 	    var ul=ulExists('#ul-departments');
 	  
-		$.each( data, function( key, val ) {
-
-	  		createDepartmentElement(key, val, ul);				
+		$.each(data, function( key, val ) {
+	  		createDepartmentElement(data[key], "", ul);				
 
 		}); 
 
 	})
 	 
 
-	// save department
-	const URLsaveDepartment="http://localhost:9000/department/save";
+
+
+	// get invoker of modal
+
+	
+	$(document).on('shown.bs.modal','.modal', function (e) {
+	  	var invoker = $(e.relatedTarget);
+	  	if(invoker.is("i")){
+	  		var id= invoker.attr('id');
+			console.log(id);
+		    $(".label-name").attr('id', id);
+		    $("#dep_name").val($(".dep-name").text());
+	  	}
+		
+    });
+
+
+	// save/update department
+
+	const URLsaveDepartment="http://localhost:9005/department/save";
 
 	$("#department_form").submit(function(e){
 
@@ -92,25 +116,46 @@ $(document).ready(function(){
 		
 		var jsonData = {};
 		jsonData["departmentName"]=name;
+		jsonData["token"]=token;
 		
+		var $update = $('.label-name[id]');
+		var length=$update.length;
+		if(length) {
+			jsonData["id"]=$update.attr('id');
+		}
+
 		console.log(jsonData);
 
 		$.ajax({
+			  headers: { 
+		        'Accept': 'application/json',
+		        'Content-Type': 'application/json' 
+    		  },
 			  type: "POST",
 			  url: URLsaveDepartment,
 			  dataType: "json",
-			  data: jsonData,
+			  data: JSON.stringify(eval(jsonData)),
 
 			  success: function(data){ //mora se vratiti generisani kljuc
 
-			  	var form=document.getElementById('department_form');
-			  	form.reset();
-	  			var ul=ulExists('#ul-departments');
-	  			createDepartmentElement(data.id, name, ul);
+			  	
+			  	if(!length){
+			  		var ul=ulExists('#ul-departments');
+	  				createDepartmentElement(data, name, ul);
 			  		
+			  	}
+
+			  	else{
+			  		$('.dep-name').text($('#dep_name').val());
+			  	}
+	  			
+
+	  			var form=document.getElementById('department_form');
+			  	form.reset();
+
 			  },
 			  error: function(){
-			  	console.log("error while deleting department");
+			  	console.log("error while saving department");
 			  }
 
 
@@ -124,22 +169,24 @@ $(document).ready(function(){
 
 	// delete department
 
-	// /departement/delete/{id}
-
-
-	const URLdeleteDepartment="http://localhost:9000/departement/delete/";
+	const URLdeleteDepartment="http://localhost:9005/department/delete/";
 	$(".departments").on('click', '.delete_icon', function(){
-		var id=$(this).parent.attr('id').split('-')[1];
+		var id=$(this).parent().parent().attr('id').split('-')[1];
+
+		
+		var url=URLdeleteDepartment+id;
+		console.log(url);
 
 		$.ajax({
+		  headers: { 
+		        'Accept': 'application/json',
+		        'Content-Type': 'application/json' 
+    	  },
 		  type: "DELETE",
-		  url: URLdeleteDepartment+id,
-		  data: {
-		      "id": id
-		    },
+		  url: url,
 
 		  success: function(){
-		  	var dep="departement-"+id;
+		  	var dep="#department-"+id;
 		  	$(dep).remove();
 		  },
 		  error: function(){
@@ -152,31 +199,6 @@ $(document).ready(function(){
 
 
 	});
-
-
-
-	// get invoker of modal
-
-	
-
-	
-	// update department
-
-	const URLupdateDepartment="http://localhost:9000/departement/save";
-
-	$(document).on('shown.bs.modal','.modal', function (e) {
-        alert('hi');
-	  	var invoker = $(e.relatedTarget);
-	  	if(invoker.is("i")){
-	  		var id= invoker.attr('id');
-			console.log(id);
-		    $(".label-name").attr('id', id);
-	  	}
-		
-    });
-
-	
-
 
 
 });

@@ -3,7 +3,7 @@
 $(document).ready(function(){
 
 
-	const URLlogin="http://localhost:9000/user/login";
+	const URLlogin="http://localhost:9005/user/login";
 
 	$("#login-form").submit(function(e){
 
@@ -15,8 +15,8 @@ $(document).ready(function(){
 
 		
 		var jsonData = {};
-		jsonData['"username"']=user;
-		jsonData['"password"']=pass;
+		jsonData["username"]=user;
+		jsonData["password"]=pass;
 		
 		console.log(jsonData);
 
@@ -34,6 +34,10 @@ $(document).ready(function(){
 
 			  	var form=document.getElementById('login-form');
 			  	form.reset();
+
+
+			  	sessionStorage.setItem('token', data.token);
+
 	  			window.location.href = "home.html";
 			  		
 			  },
